@@ -1,5 +1,11 @@
+import { RecoilRoot } from "recoil";
+
 const App = ({ Component, pageProps }) => {
-    return <Component {...pageProps} />;
+    return (
+        <RecoilRoot>
+            <Component {...pageProps} />
+        </RecoilRoot>
+    );
 };
 
 export default App;
