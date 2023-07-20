@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, query, limit } from "firebase/firestore";
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,17 +24,50 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export const getAllDocuments = async () => {
-    const quotesDocumetsQuery = query(
-        collection(db, "fuckit-quotes"),
-        limit(10)
-    )
-    const querySnapshot = await getDocs(quotesDocumetsQuery);
-    const allDocs = [];
-    querySnapshot.forEach((doc) => {
-        const id = doc.id;
-        const data = doc.data();
-        const document = { id, data };
-        allDocs.push(document);
-    });
-    return allDocs;
+    try {
+        const quotesDocumetsQuery = query(
+            collection(db, "fuckit-quotes"),
+            limit(10)
+        )
+        const querySnapshot = await getDocs(quotesDocumetsQuery);
+        const allDocs = [];
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            const data = doc.data();
+            const document = { id, data };
+            allDocs.push(document);
+        });
+        return allDocs;
+    } catch {}
 }
+
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage(app);
+const pathReference = ref(storage, 'Images Landscape/');
+const saveDownloadLinks = async (filesDownloadLinks, folderRef) => {
+    for (let item in folderRef.items) {
+        const downloadLink = await getDownloadURL(item);
+        filesDownloadLinks.push(downloadLink);
+        console.log("line 56 config", downloadLink);
+    }
+}
+export const getFiles = async () => {
+    try {
+        const filesDownloadLinks = [];
+        // List all files in folder reference
+        const folderRef = await listAll(pathReference);
+        // Get url download for files in folder reference
+        const downloadPromises = folderRef.items.map(async (item) => {
+            const downloadLink = await getDownloadURL(item);
+            return downloadLink;
+        });
+        // Wait for data fetching to be completed
+        const allDownloadLinks = await Promise.all(downloadPromises);
+        // Save files link
+        filesDownloadLinks.push(...allDownloadLinks);
+        return filesDownloadLinks;
+    } catch (error) {
+        console.log(error.message)
+    }
+};
+

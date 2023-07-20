@@ -1,9 +1,16 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import { getAllDocuments } from '@/firebase/config'
+import { getAllDocuments, getFiles } from '@/firebase/config'
 
 export default function Home() {
-  getAllDocuments();
+  const get_docs = async () => {
+    const docs = await getAllDocuments();
+  }
+  // get_docs();
+  const get_files = async () => {
+    const images = await getFiles();
+  }
+  // get_files();
   return (
     <main className={styles.main}>
       <div className={styles.description}>
