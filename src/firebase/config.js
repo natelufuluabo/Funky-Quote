@@ -38,19 +38,15 @@ export const getAllDocuments = async () => {
             allDocs.push(document);
         });
         return allDocs;
-    } catch {}
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(app);
 const pathReference = ref(storage, 'Images Landscape/');
-const saveDownloadLinks = async (filesDownloadLinks, folderRef) => {
-    for (let item in folderRef.items) {
-        const downloadLink = await getDownloadURL(item);
-        filesDownloadLinks.push(downloadLink);
-        console.log("line 56 config", downloadLink);
-    }
-}
+
 export const getFiles = async () => {
     try {
         const filesDownloadLinks = [];
@@ -67,7 +63,7 @@ export const getFiles = async () => {
         filesDownloadLinks.push(...allDownloadLinks);
         return filesDownloadLinks;
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
     }
 };
 

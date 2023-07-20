@@ -1,11 +1,10 @@
 import Layout from "../../components/layout";
+import BackgroundPicker from "../../components/backgroundPicker";
 
 const Home = () => {
     return (
         <Layout home>
-            <>
-                Hello, world!
-            </>
+            <BackgroundPicker />
         </Layout>
     )
 };
