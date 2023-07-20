@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { getAllDocuments } from '@/firebase/config'
 
 export default function Home() {
+  getAllDocuments();
   return (
     <main className={styles.main}>
       <div className={styles.description}>
