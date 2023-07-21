@@ -9,7 +9,6 @@ const BackgroundPicker = () => {
         const get_files = async () => {
             const files = await getFiles();
             setImagesSrc(files);
-            console.log(imagesSrc);
         }
         get_files();
     }, [imagesSrc]);
