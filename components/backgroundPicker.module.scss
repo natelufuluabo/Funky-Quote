@@ -1,0 +1,60 @@
+$breakpoint: 1000px;
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  .text {
+    font-size: 2rem;
+  }
+
+  .imgContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    .imgBox {
+      height: 16rem;
+      width: 16rem;
+      border-radius: 1rem;
+      padding: .2rem;
+      border: .1rem solid #333;
+
+      > img {
+        height: 16rem;
+        width: 16rem;
+        border-radius: .75rem;
+      }
+    }
+  }
+
+  @media (min-width: $breakpoint) {
+    .imgContainer {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+
+      .imgBox {
+        height: 20rem;
+        width: 20rem;
+        border-radius: 1rem;
+        padding: .5rem;
+        border: .25rem solid #333;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        > img {
+          height: 20rem;
+          width: 20rem;
+          border-radius: .5rem;
+        }
+
+        &:hover {
+          border-color: blue;
+        }
+      }
+    }
+  }
+}

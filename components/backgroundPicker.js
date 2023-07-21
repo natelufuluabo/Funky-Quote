@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getFiles } from "@/firebase/config";
 import { useEffect, useState } from "react";
+import styles from './backgroundPicker.module.scss';
 
 const BackgroundPicker = () => {
     const [imagesSrc, setImagesSrc] = useState([]);
@@ -14,18 +15,24 @@ const BackgroundPicker = () => {
     }, [imagesSrc]);
     const renderImages = () => {
         return imagesSrc.map((image) => (
-          <Image 
-            priority
-            src={image}
-            width={300}
-            height={300}
-            alt="images"
-            key={image}
-          />
+          <div key={image} className={styles.imgBox}>
+            <Image 
+              priority
+              src={image}
+              width={300}
+              height={300}
+              alt="images"
+            />
+          </div>
         ));
       };
     return (
-        <div>{renderImages()}</div>
+        <div className={styles.mainContainer}>
+          <h3 className={styles.text}>Please pick your favourite background</h3>
+          <div className={styles.imgContainer}>
+            {renderImages()}
+          </div>
+        </div>
     )
 };
 
