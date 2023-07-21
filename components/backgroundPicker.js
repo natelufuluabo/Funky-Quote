@@ -2,9 +2,12 @@ import Image from "next/image";
 import { getFiles } from "@/firebase/config";
 import { useEffect, useState } from "react";
 import styles from './backgroundPicker.module.scss';
+import { backgroundImageUrlAtom } from "@/recoilStore";
+import { useRecoilState } from "recoil";
 
 const BackgroundPicker = () => {
     const [imagesSrc, setImagesSrc] = useState([]);
+    const [imageUrl, setImageUrl] = useRecoilState(backgroundImageUrlAtom);
     useEffect(() => {
         const get_files = async () => {
             const files = await getFiles();
@@ -20,7 +23,8 @@ const BackgroundPicker = () => {
               src={image}
               width={300}
               height={300}
-              alt="images"
+              alt="background-image"
+              onClick={() => setImageUrl(image)}
             />
           </div>
         ));
