@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
 export const backgroundImageUrlAtom = atom({
-    key: 'backgroundImageUrl',
+    key: 'imageUrl',
     default: ''
 });

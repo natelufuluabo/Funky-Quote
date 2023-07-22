@@ -12,9 +12,9 @@ $breakpoint: 1000px;
   display: flex;
   justify-content: center;
   height: 100%;
-
-  @media (min-width: $breakpoint) {
-    padding: 0 15rem;
-  }
 }
 
+.articleContainer {
+  height: 100%;
+  width: 100%;
+}

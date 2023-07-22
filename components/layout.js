@@ -1,16 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './layout.module.scss';
-import { backgroundImageUrlAtom } from '@/recoilStore';
-import { useRecoilValue } from 'recoil';
 
 const Layout = ({ children }) => {
-    const imageUrl = useRecoilValue(backgroundImageUrlAtom);
-    const style = {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-    }
     return (
         <>
             <Head>
@@ -29,8 +21,8 @@ const Layout = ({ children }) => {
                     />
                 </nav>
             </header>
-            <main style={style} className={styles.mainContainer}>
-                <article>{children}</article>
+            <main className={styles.mainContainer}>
+                <article className={styles.articleContainer}>{children}</article>
             </main>
         </>
     )
