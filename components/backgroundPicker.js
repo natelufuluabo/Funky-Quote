@@ -5,23 +5,32 @@ import { useEffect, useState } from "react";
 import styles from './backgroundPicker.module.scss';
 import { backgroundImageUrlAtom } from "@/recoilStore";
 import { useRecoilState } from "recoil";
+import { urlGenerator } from "@/utils-functions";
 
 const BackgroundPicker = () => {
     const [imagesSrc, setImagesSrc] = useState([]);
+    const [nextQuoteUrl, setNextQuoteUrl] = useState('');
     const [imageUrl, setImageUrl] = useRecoilState(backgroundImageUrlAtom);
     const handleClick = (imageLink) => {
       setImageUrl(imageLink);
     };
     useEffect(() => {
-        const get_files = async () => {
-            const files = await getFiles();
-            setImagesSrc(files);
-        }
-        get_files();
+      const get_files = async () => {
+        const files = await getFiles();
+        setImagesSrc(files);
+      }
+      get_files();
     }, [imagesSrc]);
+    useEffect(() => {
+      const urlSetter = async () => {
+        const url = await urlGenerator();
+        setNextQuoteUrl(url);
+      }
+      urlSetter();
+    }, []);
     const renderImages = () => {
         return imagesSrc.map((image) => (
-          <Link href="/quote/0zIZcBEqBubTQDByTLwu" key={image} className={styles.imgBox} onClick={() => handleClick(image)}>
+          <Link href={nextQuoteUrl} key={image} className={styles.imgBox} onClick={() => handleClick(image)}>
             <Image 
               priority
               src={image}

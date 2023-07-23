@@ -1,5 +1,8 @@
 import Layout from "../../../components/layout";
-import { getQuoteId, getQuoteContent } from "@/utils-functions";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from 'next/router';
+import { getQuoteId, getQuoteContent, urlGenerator } from "@/utils-functions";
 import { useRecoilValue } from 'recoil';
 import { backgroundImageUrlAtom } from "@/recoilStore";
 
@@ -30,10 +33,27 @@ const Quote = ({ quoteContent }) => {
         height: '100%',
         width: '100%'
     }
+    const [nextQuoteUrl, setNextQuoteUrl] = useState('');
+    const router = useRouter();
+    useEffect(() => {
+        const urlSetter = async () => {
+            const url = await urlGenerator();
+            setNextQuoteUrl(url);
+        };
+        urlSetter();
+        // Attach the event handler for route change
+        router.events.on('routeChangeStart', urlSetter);
+
+        // Cleanup the event handler when the component is unmounted
+        return () => {
+            router.events.off('routeChangeStart', urlSetter);
+        };
+    }, [router.events]);
     return (
         <Layout>
             <div style={style}>
                 {quoteContent.quote}
+                <Link href={nextQuoteUrl}>Next Quote</Link>
             </div>
         </Layout>
     );

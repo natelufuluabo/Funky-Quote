@@ -27,16 +27,18 @@ export const getAllDocuments = async () => {
     try {
         const quotesDocumetsQuery = query(
             collection(db, "fuckit-quotes"),
-            limit(10)
+            // limit(10)
         )
         const querySnapshot = await getDocs(quotesDocumetsQuery);
-        const allDocs = [];
-        querySnapshot.forEach((doc) => {
+        const promises = querySnapshot.docs.map(async (doc) => {
             const id = doc.id;
             const data = doc.data();
             const document = { id, data };
-            allDocs.push(document);
+            return document;
         });
+      
+        const allDocs = await Promise.all(promises);
+      
         return allDocs;
     } catch (error) {
         console.log(error.message);

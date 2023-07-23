@@ -21,3 +21,10 @@ export const getQuoteContent = async (id) => {
         ...quoteContent['0']
     }
 };
+
+export const urlGenerator = async () => {
+    const get_docs = await getAllDocuments();
+    const quotes = await Promise.all(get_docs);
+    const randomPicker = Math.floor(Math.random() * quotes.length) + 1;
+    return `/quote/${quotes[randomPicker].id}`;
+};
