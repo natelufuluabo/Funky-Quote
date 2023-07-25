@@ -3,6 +3,9 @@ $breakpoint: 1000px;
 .navContainer {
   border-bottom: 0.1rem solid #333;
   padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   @media (min-width: $breakpoint) {
     padding: 0 15rem;
   }
@@ -17,4 +20,19 @@ $breakpoint: 1000px;
 .articleContainer {
   height: 100%;
   width: 100%;
+}
+
+.link:link,
+.link:visited,
+.link:hover,
+.link:active {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: #333; 
+}
+
+.link:hover,
+.link:active {
+  text-decoration: underline;
+  color: aqua;
 }

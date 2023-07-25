@@ -23,8 +23,12 @@ export const getQuoteContent = async (id) => {
 };
 
 export const urlGenerator = async () => {
-    const get_docs = await getAllDocuments();
-    const quotes = await Promise.all(get_docs);
-    const randomPicker = Math.floor(Math.random() * quotes.length) + 1;
-    return `/quote/${quotes[randomPicker].id}`;
+    try {
+        const get_docs = await getAllDocuments();
+        const quotes = await Promise.all(get_docs);
+        const randomPicker = Math.floor(Math.random() * quotes.length) + 1;
+        return `/quote/${quotes[randomPicker].id}`;
+    } catch (error) {
+        console.log(error.message);
+    }
 };
