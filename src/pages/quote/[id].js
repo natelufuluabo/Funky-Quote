@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { getQuoteId, getQuoteContent, urlGenerator } from "@/utils-functions";
 import { useRecoilValue } from 'recoil';
 import { backgroundImageUrlAtom } from "@/recoilStore";
+import styles from './[id].module.scss';
 
 export async function getStaticPaths() {
     const paths = await getQuoteId();
@@ -51,9 +52,11 @@ const Quote = ({ quoteContent }) => {
     }, [router.events]);
     return (
         <Layout>
-            <div style={style}>
-                {quoteContent.quote}
-                <Link href={nextQuoteUrl}>Next Quote</Link>
+            <div style={style} className={styles.quotepageContainer}>
+                <div className={styles.quoteContainer}>
+                    <h3 className={styles.quoteText}>{quoteContent.quote}</h3>
+                    <Link className={styles.nextQuoteLink} href={nextQuoteUrl}>Next Quote</Link>
+                </div>
             </div>
         </Layout>
     );
