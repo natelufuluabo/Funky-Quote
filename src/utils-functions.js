@@ -1,4 +1,5 @@
 import { getAllDocuments } from "./firebase/config";
+import Cookies from 'js-cookie';
 
 export const getQuoteId = async () => {
     const quotes = await getAllDocuments();
@@ -31,4 +32,8 @@ export const urlGenerator = async () => {
     } catch (error) {
         console.log(error.message);
     }
+};
+
+export const saveStateToCookie = (stateKey, stateValue) => {
+    Cookies.set(stateKey, JSON.stringify(stateValue));
 };

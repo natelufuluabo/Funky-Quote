@@ -26,6 +26,12 @@ $breakpoint: 1000px;
     margin: 0;
 }
 
+.iconContainer {
+    display: flex;
+    gap: 2rem;
+    font-size: 2rem;
+}
+
 .nextQuoteLink:link,
 .nextQuoteLink:visited,
 .nextQuoteLink:hover,

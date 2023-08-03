@@ -7,10 +7,10 @@ const Layout = ({ children }) => {
     return (
         <>
             <Head>
-                <meta name="og:title" content="Funky-Quote" />
+                <meta charSet="UTF-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>Funky-Quote</title>
                 <link rel='icon' href='/android-chrome-512x512.png'/>
-                <script src="https://kit.fontawesome.com/06745a3a6c.js" crossorigin="anonymous" defer></script>
             </Head>
             <header className={styles.headerContainer}>
                 <nav className={styles.navContainer}>

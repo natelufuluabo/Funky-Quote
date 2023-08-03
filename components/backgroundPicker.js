@@ -3,14 +3,15 @@ import Link from "next/link";
 import { getFiles } from "@/firebase/config";
 import { useEffect, useState } from "react";
 import styles from './backgroundPicker.module.scss';
-import { backgroundImageUrlAtom } from "@/recoilStore";
-import { useRecoilState } from "recoil";
+import { backgroundImageUrlAtom, currentPathNameAtom } from "@/recoilStore";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { urlGenerator } from "@/utils-functions";
 
 const BackgroundPicker = () => {
     const [imagesSrc, setImagesSrc] = useState([]);
     const [nextQuoteUrl, setNextQuoteUrl] = useState('');
     const [imageUrl, setImageUrl] = useRecoilState(backgroundImageUrlAtom);
+    const currentPathName = useRecoilValue(currentPathNameAtom);
     useEffect(() => {
       const get_files = async () => {
         const files = await getFiles();
@@ -21,10 +22,14 @@ const BackgroundPicker = () => {
     useEffect(() => {
       const urlSetter = async () => {
         const url = await urlGenerator();
+        if (currentPathName.length > 0) {
+          setNextQuoteUrl(currentPathName);
+          return;
+        }
         setNextQuoteUrl(url);
       }
       urlSetter();
-    }, []);
+    }, [currentPathName]);
     const renderImages = () => {
         return imagesSrc.map((image) => (
           <Link href={nextQuoteUrl} key={image} className={styles.imgBox} onClick={() => setImageUrl(image)}>
