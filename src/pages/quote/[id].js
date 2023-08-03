@@ -65,10 +65,6 @@ const Quote = ({ quoteContent }) => {
             <div style={style} className={styles.quotepageContainer}>
                 <div className={styles.quoteContainer}>
                     <h3 className={styles.quoteText}>{quoteContent.quote}</h3>
-                    <div className={styles.iconContainer}>
-                        <FontAwesomeIcon icon={faArrowUpFromBracket} />
-                        <FontAwesomeIcon icon={faHeart} />
-                    </div>
                     <Link className={styles.nextQuoteLink} href={nextQuoteUrl}>Next Quote</Link>
                 </div>
             </div>
