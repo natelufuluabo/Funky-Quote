@@ -76,7 +76,7 @@ const Quote = ({ quoteContent }) => {
                         shareOptionsShowing &&
                         <div className={styles.shareOptionsContainer}>
                             <ul className={styles.shareOptionsList}>
-                                <li onClick={() => copyToClipboard(currentPathName, setShareOptionsShowing)}>Copy Link</li>
+                                <li onClick={() => copyToClipboard(window.location.pathname, setShareOptionsShowing)}>Copy Link</li>
                                 <li onClick={() => copyToClipboard(textCopy, setShareOptionsShowing)}>Copy Text</li>
                             </ul>
                         </div>
