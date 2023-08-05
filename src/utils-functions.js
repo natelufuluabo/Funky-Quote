@@ -34,6 +34,12 @@ export const urlGenerator = async () => {
     }
 };
 
-export const saveStateToCookie = (stateKey, stateValue) => {
-    Cookies.set(stateKey, JSON.stringify(stateValue));
+export const copyToClipboard = (textToCopy, setShareOptionsShowing) => {
+    setShareOptionsShowing(false);
+    const textArea = document.createElement('textarea');
+    textArea.value = textToCopy;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
 };

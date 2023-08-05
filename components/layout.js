@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './layout.module.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 const Layout = ({ children }) => {
     return (
@@ -21,7 +23,7 @@ const Layout = ({ children }) => {
                         width={50}
                         alt='logo-image'
                     />
-                    <Link href='/settings' className={styles.link}>Change Background Image</Link>
+                    <Link href='/settings' className={styles.link}><FontAwesomeIcon icon={faGear} /></Link>
                 </nav>
             </header>
             <main className={styles.mainContainer}>

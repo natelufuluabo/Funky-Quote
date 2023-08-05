@@ -3,11 +3,11 @@ import styles from './[id].module.scss';
 import Layout from "../../../components/layout";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { getQuoteId, getQuoteContent, urlGenerator } from "@/utils-functions";
+import { getQuoteId, getQuoteContent, urlGenerator, copyToClipboard } from "@/utils-functions";
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { backgroundImageUrlAtom, currentPathNameAtom } from "@/recoilStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export async function getStaticPaths() {
     const paths = await getQuoteId();
@@ -29,6 +29,7 @@ export async function getStaticProps({ params }) {
 
 const Quote = ({ quoteContent }) => {
     const [nextQuoteUrl, setNextQuoteUrl] = useState('');
+    const [shareOptionsShowing, setShareOptionsShowing] = useState(false);
     const router = useRouter();
     const imageUrl = useRecoilValue(backgroundImageUrlAtom);
     const [currentPathName, setCurrentPathName] = useRecoilState(currentPathNameAtom);
@@ -39,6 +40,11 @@ const Quote = ({ quoteContent }) => {
         height: '100vh',
         width: '100vw'
     }
+    const textCopy = `
+    ${quoteContent.quote}
+
+    From the Funky-Quote Website: ${currentPathName}
+    `;
     useEffect(() => {
         const urlSetter = async () => {
             const url = await urlGenerator();
@@ -65,6 +71,16 @@ const Quote = ({ quoteContent }) => {
             <div style={style} className={styles.quotepageContainer}>
                 <div className={styles.quoteContainer}>
                     <h3 className={styles.quoteText}>{quoteContent.quote}</h3>
+                    <button onClick={() => setShareOptionsShowing(!shareOptionsShowing)} className={styles.shareButton}> <span>Share</span> <FontAwesomeIcon icon={faArrowUpFromBracket} /></button>
+                    {
+                        shareOptionsShowing &&
+                        <div className={styles.shareOptionsContainer}>
+                            <ul className={styles.shareOptionsList}>
+                                <li onClick={() => copyToClipboard(currentPathName, setShareOptionsShowing)}>Copy Link</li>
+                                <li onClick={() => copyToClipboard(textCopy, setShareOptionsShowing)}>Copy Text</li>
+                            </ul>
+                        </div>
+                    }
                     <Link className={styles.nextQuoteLink} href={nextQuoteUrl}>Next Quote</Link>
                 </div>
             </div>
