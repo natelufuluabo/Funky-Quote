@@ -44,7 +44,7 @@ const Quote = ({ quoteContent }) => {
     const textCopy = `
     ${quoteContent.quote}
 
-    From the Funky-Quote Website: ${currepathNamentPathName}
+    From the Funky-Quote Website: ${pathName}
     `;
     useEffect(() => {
         const urlSetter = async () => {
