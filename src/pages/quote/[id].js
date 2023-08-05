@@ -40,6 +40,7 @@ const Quote = ({ quoteContent }) => {
         height: '100vh',
         width: '100vw'
     }
+    const pathName = `https://funky-quote.vercel.app${currentPathName}`
     const textCopy = `
     ${quoteContent.quote}
 
@@ -76,7 +77,7 @@ const Quote = ({ quoteContent }) => {
                         shareOptionsShowing &&
                         <div className={styles.shareOptionsContainer}>
                             <ul className={styles.shareOptionsList}>
-                                <li onClick={() => copyToClipboard(window.location.pathname, setShareOptionsShowing)}>Copy Link</li>
+                                <li onClick={() => copyToClipboard(pathName, setShareOptionsShowing)}>Copy Link</li>
                                 <li onClick={() => copyToClipboard(textCopy, setShareOptionsShowing)}>Copy Text</li>
                             </ul>
                         </div>
