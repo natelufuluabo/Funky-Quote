@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from './[id].module.scss';
 import Layout from "../../../components/layout";
-import Link from "next/link";
+import { ShareOptions } from "../../../components/ShareOptions";
+import { QuoteContainer } from "../../../components/QuoteContainer";
 import { useRouter } from 'next/router';
 import { getQuoteId, getQuoteContent, urlGenerator, copyToClipboard } from "@/utils-functions";
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { backgroundImageUrlAtom, currentPathNameAtom } from "@/recoilStore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 
 export async function getStaticPaths() {
     const paths = await getQuoteId();
@@ -70,20 +70,20 @@ const Quote = ({ quoteContent }) => {
     return (
         <Layout>
             <div style={style} className={styles.quotepageContainer}>
-                <div className={styles.quoteContainer}>
-                    <h3 className={styles.quoteText}>{quoteContent.quote}</h3>
-                    <button onClick={() => setShareOptionsShowing(!shareOptionsShowing)} className={styles.shareButton}> <span>Share</span> <FontAwesomeIcon icon={faArrowUpFromBracket} /></button>
-                    {
-                        shareOptionsShowing &&
-                        <div className={styles.shareOptionsContainer}>
-                            <ul className={styles.shareOptionsList}>
-                                <li onClick={() => copyToClipboard(pathName, setShareOptionsShowing)}>Copy Link</li>
-                                <li onClick={() => copyToClipboard(textCopy, setShareOptionsShowing)}>Copy Text</li>
-                            </ul>
-                        </div>
-                    }
-                    <Link className={styles.nextQuoteLink} href={nextQuoteUrl}>Next Quote</Link>
-                </div>
+                <QuoteContainer
+                    quoteContent={quoteContent}
+                    setShareOptionsShowing={setShareOptionsShowing} 
+                    shareOptionsShowing={shareOptionsShowing}
+                    nextQuoteUrl={nextQuoteUrl}
+                />
+                {
+                    shareOptionsShowing &&
+                    <ShareOptions 
+                        pathName={pathName}
+                        textCopy={textCopy}
+                        setShareOptionsShowing={setShareOptionsShowing}
+                    />
+                }
             </div>
         </Layout>
     );

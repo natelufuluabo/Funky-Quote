@@ -1,0 +1,48 @@
+$breakpoint: 1000px;
+.quoteContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    
+    background-color: #33333352;
+    color: #fff;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    width: 90%;
+    text-align: center;
+    @media (min-width: $breakpoint) {
+        width: 60%;
+    }
+}
+
+.quoteText {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.shareButton {
+    border: none;
+    font-size: 1.5rem;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    display: flex;
+    gap: 1rem;
+    background-color: rgb(43, 143, 43);
+    color: #fff;
+    cursor: pointer;
+}
+
+.nextQuoteLink:link,
+.nextQuoteLink:visited,
+.nextQuoteLink:hover,
+.nextQuoteLink:active {
+    text-decoration: none;
+    font-size: 2rem;
+    color: #333;
+    background-color: yellow;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    letter-spacing: .1rem;
+}
