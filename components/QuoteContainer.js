@@ -7,7 +7,9 @@ export const QuoteContainer = ({ quoteContent, setShareOptionsShowing, shareOpti
     return (
         <div className={styles.quoteContainer}>
             <h3 className={styles.quoteText}>{quoteContent.quote}</h3>
-            <button onClick={() => setShareOptionsShowing(!shareOptionsShowing)} className={styles.shareButton}> <span>Share</span> <FontAwesomeIcon icon={faArrowUpFromBracket} /></button>
+            <button onClick={() => setShareOptionsShowing(!shareOptionsShowing)} className={styles.shareButton}> 
+                <span>Share</span> <FontAwesomeIcon icon={faArrowUpFromBracket} />
+            </button>
             <Link className={styles.nextQuoteLink} href={nextQuoteUrl}>Next Quote</Link>
         </div>
     )

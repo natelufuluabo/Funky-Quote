@@ -9,6 +9,7 @@
 }
 
 .shareOptionsList {
+    position: relative;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -25,4 +26,15 @@
     li {
         cursor: pointer;
     }
+}
+
+.closeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
 }
