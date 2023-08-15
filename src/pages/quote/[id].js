@@ -33,6 +33,7 @@ const Quote = ({ quoteContent }) => {
     const router = useRouter();
     const imageUrl = useRecoilValue(backgroundImageUrlAtom);
     const [currentPathName, setCurrentPathName] = useRecoilState(currentPathNameAtom);
+    const link = nextQuoteUrl ? nextQuoteUrl : currentPathName;
     const style = {
         backgroundImage: `url(${imageUrl || "https://firebasestorage.googleapis.com/v0/b/funky-quote.appspot.com/o/Images%20Landscape%2F101.jpg?alt=media&token=0ba0a731-fcad-4df4-8f13-4dd1c920598e"})`,
         backgroundSize: 'cover',
@@ -74,7 +75,7 @@ const Quote = ({ quoteContent }) => {
                     quoteContent={quoteContent}
                     setShareOptionsShowing={setShareOptionsShowing} 
                     shareOptionsShowing={shareOptionsShowing}
-                    nextQuoteUrl={nextQuoteUrl}
+                    nextQuoteUrl={link}
                 />
                 {
                     shareOptionsShowing &&

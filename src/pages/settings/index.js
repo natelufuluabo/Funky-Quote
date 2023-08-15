@@ -3,8 +3,8 @@ import BackgroundPicker from "../../../components/backgroundPicker";
 
 const Settings = () => {
     return (
-        <Layout suppressHydrationWarning={true}>
-            <BackgroundPicker suppressHydrationWarning={true}/>
+        <Layout>
+            <BackgroundPicker/>
         </Layout>
     )
 };
